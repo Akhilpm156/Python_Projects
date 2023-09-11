@@ -13,6 +13,6 @@ in this Project find out the most sales happening State,product,product size,and
 In this project i scraped https://books.toscrape.com website i picked name,price,review,available status from all avaliable pages.
 library used : requests,BeautifulSoup,Pandas ----> [Jupyter Notebook File](https://github.com/Akhilpm156/Python_Projects/blob/5373ad46dde8647cad6e53ca28fcbbb0279820f8/web%20scraping%20project/book%20to%20scrap.ipynb)
 
-### [Project_4 - Machine learning algorithms](https://github.com/Akhilpm156/Python_Projects/tree/bf9ac0cb91feb62be31e9f51233e0b4269bb0c2b/Machine%20learning%20algorithms)
+### [Project_4 - Machine learning algorithms](https://github.com/Akhilpm156/Python_Projects/tree/104336fb780784b2dd03d21a204da059e5c24d30/Machine%20learning%20algorithms)
 
 learning Machine learning algorithms.
