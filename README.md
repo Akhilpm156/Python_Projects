@@ -16,3 +16,9 @@ library used : requests,BeautifulSoup,Pandas ----> [Jupyter Notebook File](https
 ### [Project_4 - Machine learning algorithms](https://github.com/Akhilpm156/Python_Projects/tree/104336fb780784b2dd03d21a204da059e5c24d30/Machine%20learning%20algorithms)
 
 learning Machine learning algorithms.
+
+### [Project_5 - Home Price Prediction](https://github.com/Akhilpm156/Python_Projects/tree/43495648d78b798f972fccbfe4a538cca8afb59e/home%20price%20Predict)
+
+In this is project build a regression Mechine learning model to predict price of house. learning and data resources from codebasics
+this project is end to end project that include building website,model, and python flask server.
+
