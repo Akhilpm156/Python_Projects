@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<title>Price Prediction</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+function getBathValue() {
+  var uiBathrooms = document.getElementsByName("uiBathrooms");
+  for(var i in uiBathrooms) {
+    if(uiBathrooms[i].checked) {
+        return parseInt(i)+1;
+    }
+  }
+  return -1; // Invalid Value
+}
+
+function getBHKValue() {
+  var uiBHK = document.getElementsByName("uiBHK");
+  for(var i in uiBHK) {
+    if(uiBHK[i].checked) {
+        return parseInt(i)+1;
+    }
+  }
+  return -1; // Invalid Value
+}
+
+function onClickedEstimatePrice() {
+  console.log("Estimate price button clicked");
+  var sqft = document.getElementById("uiSqft");
+  var bhk = getBHKValue();
+  var bathrooms = getBathValue();
+  var location = document.getElementById("uiLocations");
+  var estPrice = document.getElementById("uiEstimatedPrice");
+
+  var url = "http://127.0.0.1:5000/get_home_price";
+
+  $.post(url, {
+      total_sqft: parseFloat(sqft.value),
+      bhk: bhk,
+      bath: bathrooms,
+      location: location.value
+  },function(data, status) {
+      console.log(data.estimated_price);
+      estPrice.innerHTML = "<h2>" + data.estimated_price.toString() + " Lakh</h2>";
+      console.log(status);
+  });
+}
+
+</script>
+
+<style>
+
+#home{
+  padding: 30px 0;
+  margin : 10px;
+  color : rgb(255,0,0);
+  border: 3px solid green;
+  text-align: center;
+  font-size: 25px
+}
+
+.switch-field {
+	display: flex;
+	margin-bottom: 36px;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #e4e4e4;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+	padding: 6px 16px;
+	margin-right: -1px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+	background-color: rgb(60,35,250);
+	box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
+
+.form {
+	max-width: 270px;
+	font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+	font-weight: normal;
+	line-height: 1.625;
+	margin: 8px auto;
+	padding-left: 16px;
+	z-index: 2;
+}
+
+h2 {
+	font-size: 18px;
+	margin-bottom: 8px;
+        color : rgb(0,0,0);
+      
+        
+}
+.area{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 76%;
+  border: 0;
+  margin: 0 0 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.location{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 76%;
+  border: 0;
+  margin: 0 0 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.submit{
+  background: rgb(255,150,155);
+  width: 76%;
+  border: 0;
+  margin: 25px 0 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+	height: 35px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.result{
+		background: rgb(0,200,100);
+		width: 76%;
+		border: 0;
+		margin: 25px 0 10px;
+		box-sizing: border-box;
+		font-size: 15px;
+		height: 35px;
+		text-align: center;
+}
+
+.background {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: url(
+"data:image/jpeg;base64,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");
+            background-size: cover;
+            background-position: center;
+            filter: blur(15px);
+            z-index: -1;
+}
+
+
+
+</style>
+</head>
+<body>
+<div class="background"></div>
+<h2 id='home'>Home Price Prediction</h2>
+<form class="form">
+	<h2>Area (Square Feet)</h2>
+    <input class="area"  type="text" id="uiSqft" class="floatLabel" name="Squareft" value="1000">
+<h2>Bed Rooms</h2>
+	<div class="switch-field">
+		<input type="radio" id="radio-bhk-1" name="uiBHK" value="1"/>
+		<label for="radio-bhk-1">1</label>
+		<input type="radio" id="radio-bhk-2" name="uiBHK" value="2" checked/>
+		<label for="radio-bhk-2">2</label>
+		<input type="radio" id="radio-bhk-3" name="uiBHK" value="3"/>
+		<label for="radio-bhk-3">3</label>
+		<input type="radio" id="radio-bhk-4" name="uiBHK" value="4"/>
+		<label for="radio-bhk-4">4</label>
+		<input type="radio" id="radio-bhk-5" name="uiBHK" value="5"/>
+		<label for="radio-bhk-5">5</label>
+	</div>
+	</form>
+<form class="form">
+	<h2>Bath</h2>
+	<div class="switch-field">
+		<input type="radio" id="radio-bath-1" name="uiBathrooms" value="1"/>
+		<label for="radio-bath-1">1</label>
+		<input type="radio" id="radio-bath-2" name="uiBathrooms" value="2" checked/>
+		<label for="radio-bath-2">2</label>
+		<input type="radio" id="radio-bath-3" name="uiBathrooms" value="3"/>
+		<label for="radio-bath-3">3</label>
+		<input type="radio" id="radio-bath-4" name="uiBathrooms" value="4"/>
+		<label for="radio-bath-4">4</label>
+		<input type="radio" id="radio-bath-5" name="uiBathrooms" value="5"/>
+		<label for="radio-bath-5">5</label>
+	</div>
+		<h2>Location</h2>
+	<div>
+  <select class="location" name="" id="uiLocations">
+    <option value="" disabled="disabled" selected="selected">Choose a Location</option>
+		<option> devarachikkanahalli</option>
+<option>1st block jayanagar</option>
+<option>1st phase jp nagar</option>
+<option>2nd phase judicial layout</option>
+<option>2nd stage nagarbhavi</option>
+<option>5th block hbr layout</option>
+<option>5th phase jp nagar</option>
+<option>6th phase jp nagar</option>
+<option>7th phase jp nagar</option>
+<option>8th phase jp nagar</option>
+<option>9th phase jp nagar</option>
+<option>aecs layout</option>
+<option>abbigere</option>
+<option>akshaya nagar</option>
+<option>ambalipura</option>
+<option>ambedkar nagar</option>
+<option>amruthahalli</option>
+<option>anandapura</option>
+<option>ananth nagar</option>
+<option>anekal</option>
+<option>anjanapura</option>
+<option>ardendale</option>
+<option>arekere</option>
+<option>attibele</option>
+<option>beml layout</option>
+<option>btm 2nd stage</option>
+<option>btm layout</option>
+<option>babusapalaya</option>
+<option>badavala nagar</option>
+<option>balagere</option>
+<option>banashankari</option>
+<option>banashankari stage ii</option>
+<option>banashankari stage iii</option>
+<option>banashankari stage v</option>
+<option>banashankari stage vi</option>
+<option>banaswadi</option>
+<option>banjara layout</option>
+<option>bannerghatta</option>
+<option>bannerghatta road</option>
+<option>basavangudi</option>
+<option>basaveshwara nagar</option>
+<option>battarahalli</option>
+<option>begur</option>
+<option>begur road</option>
+<option>bellandur</option>
+<option>benson town</option>
+<option>bharathi nagar</option>
+<option>bhoganhalli</option>
+<option>billekahalli</option>
+<option>binny pete</option>
+<option>bisuvanahalli</option>
+<option>bommanahalli</option>
+<option>bommasandra</option>
+<option>bommasandra industrial area</option>
+<option>bommenahalli</option>
+<option>brookefield</option>
+<option>budigere</option>
+<option>cv raman nagar</option>
+<option>chamrajpet</option>
+<option>chandapura</option>
+<option>channasandra</option>
+<option>chikka tirupathi</option>
+<option>chikkabanavar</option>
+<option>chikkalasandra</option>
+<option>choodasandra</option>
+<option>cooke town</option>
+<option>cox town</option>
+<option>cunningham road</option>
+<option>dasanapura</option>
+<option>dasarahalli</option>
+<option>devanahalli</option>
+<option>dodda nekkundi</option>
+<option>doddaballapur</option>
+<option>doddakallasandra</option>
+<option>doddathoguru</option>
+<option>domlur</option>
+<option>dommasandra</option>
+<option>epip zone</option>
+<option>electronic city</option>
+<option>electronic city phase ii</option>
+<option>electronics city phase 1</option>
+<option>frazer town</option>
+<option>gm palaya</option>
+<option>garudachar palya</option>
+<option>giri nagar</option>
+<option>gollarapalya hosahalli</option>
+<option>gottigere</option>
+<option>green glen layout</option>
+<option>gubbalala</option>
+<option>gunjur</option>
+<option>hal 2nd stage</option>
+<option>hbr layout</option>
+<option>hrbr layout</option>
+<option>hsr layout</option>
+<option>haralur road</option>
+<option>harlur</option>
+<option>hebbal</option>
+<option>hebbal kempapura</option>
+<option>hegde nagar</option>
+<option>hennur</option>
+<option>hennur road</option>
+<option>hoodi</option>
+<option>horamavu agara</option>
+<option>horamavu banaswadi</option>
+<option>hormavu</option>
+<option>hosa road</option>
+<option>hosakerehalli</option>
+<option>hoskote</option>
+<option>hosur road</option>
+<option>hulimavu</option>
+<option>isro layout</option>
+<option>itpl</option>
+<option>iblur village</option>
+<option>indira nagar</option>
+<option>jp nagar</option>
+<option>jakkur</option>
+<option>jalahalli</option>
+<option>jalahalli east</option>
+<option>jigani</option>
+<option>judicial layout</option>
+<option>kr puram</option>
+<option>kadubeesanahalli</option>
+<option>kadugodi</option>
+<option>kaggadasapura</option>
+<option>kaggalipura</option>
+<option>kaikondrahalli</option>
+<option>kalena agrahara</option>
+<option>kalyan nagar</option>
+<option>kambipura</option>
+<option>kammanahalli</option>
+<option>kammasandra</option>
+<option>kanakapura</option>
+<option>kanakpura road</option>
+<option>kannamangala</option>
+<option>karuna nagar</option>
+<option>kasavanhalli</option>
+<option>kasturi nagar</option>
+<option>kathriguppe</option>
+<option>kaval byrasandra</option>
+<option>kenchenahalli</option>
+<option>kengeri</option>
+<option>kengeri satellite town</option>
+<option>kereguddadahalli</option>
+<option>kodichikkanahalli</option>
+<option>kodigehaali</option>
+<option>kodigehalli</option>
+<option>kodihalli</option>
+<option>kogilu</option>
+<option>konanakunte</option>
+<option>koramangala</option>
+<option>kothannur</option>
+<option>kothanur</option>
+<option>kudlu</option>
+<option>kudlu gate</option>
+<option>kumaraswami layout</option>
+<option>kundalahalli</option>
+<option>lb shastri nagar</option>
+<option>laggere</option>
+<option>lakshminarayana pura</option>
+<option>lingadheeranahalli</option>
+<option>magadi road</option>
+<option>mahadevpura</option>
+<option>mahalakshmi layout</option>
+<option>mallasandra</option>
+<option>malleshpalya</option>
+<option>malleshwaram</option>
+<option>marathahalli</option>
+<option>margondanahalli</option>
+<option>marsur</option>
+<option>mico layout</option>
+<option>munnekollal</option>
+<option>murugeshpalya</option>
+<option>mysore road</option>
+<option>ngr layout</option>
+<option>nri layout</option>
+<option>nagarbhavi</option>
+<option>nagasandra</option>
+<option>nagavara</option>
+<option>nagavarapalya</option>
+<option>narayanapura</option>
+<option>neeladri nagar</option>
+<option>nehru nagar</option>
+<option>ombr layout</option>
+<option>old airport road</option>
+<option>old madras road</option>
+<option>padmanabhanagar</option>
+<option>pai layout</option>
+<option>panathur</option>
+<option>parappana agrahara</option>
+<option>pattandur agrahara</option>
+<option>poorna pragna layout</option>
+<option>prithvi layout</option>
+<option>r.t. nagar</option>
+<option>rachenahalli</option>
+<option>raja rajeshwari nagar</option>
+<option>rajaji nagar</option>
+<option>rajiv nagar</option>
+<option>ramagondanahalli</option>
+<option>ramamurthy nagar</option>
+<option>rayasandra</option>
+<option>sahakara nagar</option>
+<option>sanjay nagar</option>
+<option>sarakki nagar</option>
+<option>sarjapur</option>
+<option>sarjapur  road</option>
+<option>sarjapura - attibele road</option>
+<option>sector 2 hsr layout</option>
+<option>sector 7 hsr layout</option>
+<option>seegehalli</option>
+<option>shampura</option>
+<option>shivaji nagar</option>
+<option>singasandra</option>
+<option>somasundara palya</option>
+<option>sompura</option>
+<option>sonnenahalli</option>
+<option>subramanyapura</option>
+<option>sultan palaya</option>
+<option>tc palaya</option>
+<option>talaghattapura</option>
+<option>thanisandra</option>
+<option>thigalarapalya</option>
+<option>thubarahalli</option>
+<option>thyagaraja nagar</option>
+<option>tindlu</option>
+<option>tumkur road</option>
+<option>ulsoor</option>
+<option>uttarahalli</option>
+<option>varthur</option>
+<option>varthur road</option>
+<option>vasanthapura</option>
+<option>vidyaranyapura</option>
+<option>vijayanagar</option>
+<option>vishveshwarya layout</option>
+<option>vishwapriya layout</option>
+<option>vittasandra</option>
+<option>whitefield</option>
+<option>yelachenahalli</option>
+<option>yelahanka</option>
+<option>yelahanka new town</option>
+<option>yelenahalli</option>
+<option>yeshwanthpur</option>
+
+  </select>
+</div>
+	<button class="submit" onclick="onClickedEstimatePrice()" type="button">Estimate Price</button>
+	<div id="uiEstimatedPrice" class="result">	<h2></h2> </div>
+
+
+
+</body>
+</html>
