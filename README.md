@@ -22,3 +22,7 @@ learning Machine learning algorithms.
 In this is project build a regression Mechine learning model to predict price of house. learning and data resources from codebasics
 this project is end to end project that include building website,model, and python flask server.
 
+### [Project_6 - Deep_learning_project_cnn](https://github.com/Akhilpm156/Python_Projects/tree/572fe74bb0dd02e34255da88229b54e2248bb6fa/Deep_learning_project_cnn)
+
+I developed a Convolutional Neural Network (CNN) for classifying tomato diseases as part of an exercise based on the Codebasics (YouTube) Deep Learning With TensorFlow 2.0, Keras, and Python tutorial. In this project, I utilized TensorFlow, Keras, NumPy, and Matplotlib libraries. To reduce computation, I selected a subset of images for each class and performed data augmentation. I then loaded the augmented data into TensorFlow Datasets, built the model, and saved it for future use   ----> [Jupyter Notebook File](https://github.com/Akhilpm156/Python_Projects/blob/572fe74bb0dd02e34255da88229b54e2248bb6fa/Deep_learning_project_cnn/Tomato%20disease.ipynb)
+
