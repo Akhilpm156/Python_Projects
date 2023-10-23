@@ -1,6 +1,6 @@
-# Object Detection Car Count using YOLO V8
+# Object Detection Vehicle Counts using YOLO V8
 
-Object Detection Car Count is a computer vision project that uses deep learning techniques to detect and count the number of Vehicle in the videos. This project can help me enhance my knowledge in computer vision, and I have learned from the CVZone YouTube channel.
+Object Detection Vehicle Counts is a computer vision project that uses deep learning techniques to detect and count the number of Vehicle in the videos. This project can help me enhance my knowledge in computer vision, and I have found this awesome project and materials from CVZone.
 
 ## Features
 
